@@ -3,15 +3,15 @@ haproxy:
   ports:
    - 80:5000
    - 1936:1936
-  env_file: .env
+  env_file: .env.docker
   links:
-   - laravel
+   - businessstack
   environment:
-   - SERVICE_NAMES=laravel
+   - SERVICE_NAMES=businessstack
 
-laravel:
+businessstack:
   image: reflexions/docker-laravel:latest
-  env_file: .env
+  env_file: .env.docker
   links:
     - database
     - rabbitmq
@@ -23,23 +23,23 @@ laravel:
 
 database:
   image: postgres:9.4.4
-  env_file: .env
+  env_file: .env.docker
   environment:
     LC_ALL: C.UTF-8
 
 rabbitmq:
   image: rabbitmq
-  env_file: .env
+  env_file: .env.docker
 
 redis:
   image: redis
-  env_file: .env
+  env_file: .env.docker
 
 mongodb:
   image: mongo
-  env_file: .env
+  env_file: .env.docker
 
 elasticsearch:
   image: elasticsearch
-  env_file: .env
+  env_file: .env.docker
 
