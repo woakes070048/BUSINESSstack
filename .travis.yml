@@ -33,6 +33,7 @@ before_script:
   - mysql -e 'create database travis;'
   - mv .env.travis .env
   - chmod -R 777 storage
+  - npm install -g npm@2
   - npm install
   - gulp
   - php artisan key:generate
