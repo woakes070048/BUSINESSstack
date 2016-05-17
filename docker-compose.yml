@@ -1,0 +1,45 @@
+haproxy:
+  image: eeacms/haproxy
+  ports:
+   - 80:5000
+   - 1936:1936
+  env_file: .env
+  links:
+   - laravel
+  environment:
+   - SERVICE_NAMES=laravel
+
+laravel:
+  image: reflexions/docker-laravel:latest
+  env_file: .env
+  links:
+    - database
+    - rabbitmq
+    - redis
+    - mongodb
+    - elasticsearch
+  volumes:
+    - .:/var/www/laravel
+
+database:
+  image: postgres:9.4.4
+  env_file: .env
+  environment:
+    LC_ALL: C.UTF-8
+
+rabbitmq:
+  image: rabbitmq
+  env_file: .env
+
+redis:
+  image: redis
+  env_file: .env
+
+mongodb:
+  image: mongo
+  env_file: .env
+
+elasticsearch:
+  image: elasticsearch
+  env_file: .env
+
