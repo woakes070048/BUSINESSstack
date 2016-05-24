@@ -25,6 +25,9 @@ before_install:
   - travis_retry composer self-update
 
 install:
+  - sudo apt-get -qqy update
+  - sudo apt-get -qqy install docker-engine || true
+  - sudo usermod -aG docker "$USER"
   - travis_retry pip install --user --upgrade pip certifi docker-compose pyopenssl ndg-httpsclient pyasn1
   - if [[ $setup = 'basic' ]]; then travis_retry composer install --no-interaction --prefer-dist; fi
   - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable; fi
@@ -32,6 +35,8 @@ install:
 
 before_script:
   - eval $(docker-machine env) || exit 0
+  - docker version
+  - docker-compose version
   - docker ps
   - docker-compose up -d
   - mv .env.travis .env
