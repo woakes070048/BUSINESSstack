@@ -31,6 +31,8 @@ install:
   - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable; fi
 
 before_script:
+  - eval $(docker-machine env) || exit 0
+  - docker ps
   - docker-compose up -d
   - mv .env.travis .env
   - chmod -R 777 storage
