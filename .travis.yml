@@ -30,6 +30,7 @@ install:
   - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable; fi
 
 before_script:
+  - docker-compose up
   - mv .env.travis .env
   - chmod -R 777 storage
   - npm install -g npm@2
@@ -38,7 +39,7 @@ before_script:
   - php artisan key:generate
   - php artisan migrate:refresh --seed
   - php artisan serve >/dev/null 2>&1 &
-  - docker-composer up
+  
 
 script: vendor/bin/phpunit
 
