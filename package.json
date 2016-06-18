@@ -9,7 +9,8 @@
     "laravel-elixir": "^5.0.0",
     "bootstrap-sass": "^3.0.0",
     "browserify-es6-transpiler": "0.0.3",
-    "laravel-elixir-babel": "^0.2.0"
+    "laravel-elixir-babel": "^0.2.0",
+    "babel-preset-react"
   },
   "dependencies": {
     "axios": "^0.12.0",
